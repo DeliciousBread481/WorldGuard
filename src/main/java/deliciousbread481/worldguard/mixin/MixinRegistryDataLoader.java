@@ -61,8 +61,8 @@ public class MixinRegistryDataLoader {
                 E element = dataresult.getOrThrow(false, (errorMsg) -> {});  
   
                 p_256211_.register(resourceKey, element, entry.getValue().isBuiltin()  
-                        ? net.minecraft.core.Lifecycle.stable()  
-                        : net.minecraft.core.Lifecycle.experimental());  
+                        ? com.mojang.serialization.Lifecycle.stable()  
+                        : com.mojang.serialization.Lifecycle.experimental());experimental());  
   
             } catch (Exception e) {  
                 String errorMessage = e.getMessage() != null ? e.getMessage() : "";  

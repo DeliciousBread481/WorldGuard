@@ -50,14 +50,17 @@ public class WorldGuardMod {
         return loadedModNamespaces;  
     }  
      
+    @SuppressWarnings("unchecked")  
     @net.minecraftforge.eventbus.api.SubscribeEvent  
     public void onMissingMappings(MissingMappingsEvent event) {  
-        event.getAllMappings(event.getKey()).forEach(mapping -> {  
+        ResourceKey<? extends Registry<Object>> registryKey =   
+            (ResourceKey<? extends Registry<Object>>) (ResourceKey<?>) event.getKey();  
+        event.getAllMappings(registryKey).forEach(mapping -> {  
             ResourceLocation key = mapping.getKey();  
-            if (!isNamespaceLoaded(key.getNamespace())) {  
+            if (!loadedModNamespaces.contains(key.getNamespace())) {  
                 LOGGER.warn("[WorldGuard] Ignoring missing registry entry from removed mod: {}", key);  
                 mapping.ignore();  
             }  
         });  
-    }  
+    }
 }
