@@ -62,7 +62,7 @@ public class MixinRegistryDataLoader {
   
                 p_256211_.register(resourceKey, element, entry.getValue().isBuiltin()  
                         ? com.mojang.serialization.Lifecycle.stable()  
-                        : com.mojang.serialization.Lifecycle.experimental());experimental());  
+                        : com.mojang.serialization.Lifecycle.experimental());
   
             } catch (Exception e) {  
                 String errorMessage = e.getMessage() != null ? e.getMessage() : "";  
