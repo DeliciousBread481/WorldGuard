@@ -1,5 +1,7 @@
 package deliciousbread481.worldguard;  
   
+import net.minecraft.core.Registry;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;  
 import net.minecraftforge.common.MinecraftForge;  
 import net.minecraftforge.fml.ModList;  
@@ -7,7 +9,6 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.MissingMappingsEvent;  
 import org.apache.logging.log4j.LogManager;  
 import org.apache.logging.log4j.Logger;  
-import org.jetbrains.annotations.Nullable;  
   
 import java.util.Set;  
 import java.util.stream.Collectors;  
@@ -16,7 +17,6 @@ import java.util.stream.Collectors;
 public class WorldGuardMod {  
   
     public static final Logger LOGGER = LogManager.getLogger("WorldGuard");  
-  
     private static Set<String> loadedModNamespaces;  
   
     public WorldGuardMod() {  
@@ -26,8 +26,8 @@ public class WorldGuardMod {
                 .collect(Collectors.toSet());  
         loadedModNamespaces.add("minecraft");  
         loadedModNamespaces.add("forge");  
-        loadedModNamespaces.add("c");
-        LOGGER.info("[WorldGuard] Initialized. Loaded mod namespaces: {}", loadedModNamespaces.size());  
+        loadedModNamespaces.add("c");  
+        LOGGER.info("[WorldGuard] Initialized. Tracking {} mod namespaces.", loadedModNamespaces.size());  
     }  
   
     public static boolean isPackAvailable(String packId) {  
@@ -40,8 +40,8 @@ public class WorldGuardMod {
         }  
         return true;  
     }  
-    
-    public static boolean isNamespaceLoaded(@Nullable String namespace) {  
+  
+    public static boolean isNamespaceLoaded(String namespace) {  
         if (namespace == null) return false;  
         return loadedModNamespaces != null && loadedModNamespaces.contains(namespace);  
     }  
@@ -49,12 +49,12 @@ public class WorldGuardMod {
     public static Set<String> getLoadedModNamespaces() {  
         return loadedModNamespaces;  
     }  
-     
+  
     @SuppressWarnings("unchecked")  
     @net.minecraftforge.eventbus.api.SubscribeEvent  
     public void onMissingMappings(MissingMappingsEvent event) {  
-        ResourceKey<? extends Registry<Object>> registryKey =   
-            (ResourceKey<? extends Registry<Object>>) (ResourceKey<?>) event.getKey();  
+        ResourceKey<? extends Registry<Object>> registryKey =  
+                (ResourceKey<? extends Registry<Object>>) (ResourceKey<?>) event.getKey();  
         event.getAllMappings(registryKey).forEach(mapping -> {  
             ResourceLocation key = mapping.getKey();  
             if (!loadedModNamespaces.contains(key.getNamespace())) {  
@@ -62,5 +62,5 @@ public class WorldGuardMod {
                 mapping.ignore();  
             }  
         });  
-    }
+    }  
 }
