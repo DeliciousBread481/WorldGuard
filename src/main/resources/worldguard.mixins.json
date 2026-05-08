@@ -1,0 +1,17 @@
+{  
+  "required": true,  
+  "minVersion": "0.8",  
+  "package": "deliciousbread481.worldguard.mixin",  
+  "compatibilityLevel": "JAVA_17",  
+  "refmap": "worldguard.refmap.json",  
+  "mixins": [  
+    "MixinRegistryDataLoader",  
+    "MixinMinecraftServer"  
+  ],  
+  "client": [  
+    "MixinWorldOpenFlows"  
+  ],  
+  "injectors": {  
+    "defaultRequire": 1
+  }  
+}

@@ -1,0 +1,76 @@
+plugins {  
+    id 'eclipse'  
+    id 'idea'  
+    id 'net.minecraftforge.gradle' version '[6.0.16,6.2)'  
+    id 'org.spongepowered.mixin' version '0.7-SNAPSHOT'  
+}  
+  
+version = mod_version  
+group = mod_group  
+  
+base {  
+    archivesName = 'worldguard'  
+}  
+  
+java.toolchain.languageVersion = JavaLanguageVersion.of(17)  
+  
+minecraft {  
+    mappings channel: mapping_channel, version: mapping_version  
+  
+    runs {  
+        client {  
+            workingDirectory project.file('run')  
+            property 'forge.logging.markers', 'REGISTRIES'  
+            property 'forge.logging.console.level', 'debug'  
+            property 'mixin.env.remapRefMap', 'true'  
+            property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"  
+            mods {  
+                worldguard {  
+                    source sourceSets.main  
+                }  
+            }  
+        }  
+  
+        server {  
+            workingDirectory project.file('run')  
+            property 'forge.logging.markers', 'REGISTRIES'  
+            property 'forge.logging.console.level', 'debug'  
+            property 'mixin.env.remapRefMap', 'true'  
+            property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"  
+            mods {  
+                worldguard {  
+                    source sourceSets.main  
+                }  
+            }  
+        }  
+    }  
+}  
+  
+mixin {  
+    add sourceSets.main, 'worldguard.refmap.json'  
+    config 'worldguard.mixins.json'  
+}  
+  
+repositories {  
+    maven { url = 'https://maven.minecraftforge.net/' }  
+    maven { url = 'https://repo.spongepowered.org/maven/' }  
+}  
+  
+dependencies {  
+    minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"  
+    annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'  
+}  
+  
+jar {  
+    manifest {  
+        attributes([  
+            "Specification-Title"     : "worldguard",  
+            "Specification-Vendor"    : "DeliciousBread481",  
+            "Specification-Version"   : "1",  
+            "Implementation-Title"    : project.name,  
+            "Implementation-Version"  : project.jar.archiveVersion,  
+            "Implementation-Vendor"   : "DeliciousBread481",  
+            "MixinConfigs"            : "worldguard.mixins.json"  
+        ])  
+    }  
+}

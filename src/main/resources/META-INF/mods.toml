@@ -1,0 +1,26 @@
+modLoader = "javafml"  
+loaderVersion = "[47,)"  
+license = "MIT"  
+  
+[[mods]]  
+modId = "worldguard"  
+version = "1.0.0"  
+displayName = "World Guard - Missing Mod Recovery"  
+description = '''  
+Allows worlds to load even when mods with worldgen datapacks or dimensions have been removed.  
+Automatically filters out unavailable datapacks and skips missing registry entries.  
+'''  
+  
+[[dependencies.worldguard]]  
+modId = "forge"  
+mandatory = true  
+versionRange = "[47,)"  
+ordering = "NONE"  
+side = "BOTH"  
+  
+[[dependencies.worldguard]]  
+modId = "minecraft"  
+mandatory = true  
+versionRange = "[1.20.1,1.21)"  
+ordering = "NONE"  
+side = "BOTH"
