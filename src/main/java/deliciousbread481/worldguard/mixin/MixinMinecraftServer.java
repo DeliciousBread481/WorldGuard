@@ -18,7 +18,7 @@ import java.util.List;
 public class MixinMinecraftServer {  
   
     @Inject(  
-        method = "m_246048_(Lnet/minecraft/server/packs/repository/PackRepository;Lnet/minecraft/world/level/DataPackConfig;ZLnet/minecraft/world/flag/FeatureFlagSet;)Lnet/minecraft/world/level/WorldDataConfiguration;",  
+        method = "configurePackRepository",  
         at = @At("HEAD")  
     )  
     private static void worldguard_filterRemovedPacks(  

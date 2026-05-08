@@ -22,7 +22,7 @@ import java.util.Map;
 public class MixinRegistryDataLoader {  
   
     @Inject(  
-        method = "m_255048_(Lnet/minecraft/resources/RegistryOps$RegistryInfoLookup;Lnet/minecraft/server/packs/resources/ResourceManager;Lnet/minecraft/resources/ResourceKey;Lnet/minecraft/core/WritableRegistry;Lcom/mojang/serialization/Decoder;Ljava/util/Map;)V",  
+        method = "loadRegistryContents",  
         at = @At("HEAD"),  
         cancellable = true  
     )  
